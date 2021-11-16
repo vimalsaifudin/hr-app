@@ -8,7 +8,7 @@
 ```
 docker-compose up
 ```
-> Docker will pull the MySQL and Node.js images (if our machine does not have it before)
+> Docker will pull the MySQL and Node.js images (if the machine does not have it before)
 
 The services can be run on the background with command:
 
