@@ -15,6 +15,28 @@ The services can be run on the background with command:
 ```
 docker-compose up -d
 ```
+
+### View it in the browser
+
+Open [http://127.0.0.1:8888](http://127.0.0.1:8888) to view it in the browser.
+
+
+## Stop the Application
+Stopping all the running containers is also simple with a single command:
+
+```
+docker-compose down
+```
+
+> If you need to stop and remove all containers, networks, and all images used by any service in docker-compose.yml file, use the command
+Stopping all the running containers is also simple with a single command:
+
+```
+docker-compose down --rmi all
+```
+
+## Run without Docker
+
 ## User Registration, User Login and Authorization process.
 > Node.js Rest APIs with Express, Sequelize & MySQL
 
