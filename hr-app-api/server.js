@@ -1,6 +1,6 @@
 require("dotenv").config();
+var bcrypt = require("bcryptjs");
 const express = require("express");
-const bodyParser = require("body-parser");
 const cors = require("cors");
 
 const app = express();
@@ -23,13 +23,14 @@ require('./app/routes/user.routes')(app);
 
 const db = require("./app/models");
 const Role = db.role;
+const User = db.user;
 
-db.sequelize.sync();
+//db.sequelize.sync();
 
-/*db.sequelize.sync({force: true}).then(() => {
-    console.log('Drop and Resync Db');
-    initial();
-  });*/
+db.sequelize.sync({ force: true }).then(() => {
+  console.log('Drop and Resync Db');
+  initial();
+});
 
 // simple route
 app.get("/", (req, res) => {
@@ -44,19 +45,51 @@ app.listen(PORT, () => {
 });
 
 function initial() {
-    Role.create({
-      id: 1,
-      name: "user"
+  Role.create({
+    id: 1,
+    name: "user"
+  });
+
+  Role.create({
+    id: 2,
+    name: "moderator"
+  });
+
+  Role.create({
+    id: 3,
+    name: "admin"
+  });
+
+  // add admin
+  User.create({
+    username: 'admin',
+    email: 'admin@hr-app.com',
+    password: bcrypt.hashSync('123456', 8)
+  })
+    .then(user => {
+      user.setRoles([3])
     });
-   
-    Role.create({
-      id: 2,
-      name: "moderator"
+
+  // add moderator
+  User.create({
+    username: 'moderator1',
+    email: 'moderator1@hr-app.com',
+    password: bcrypt.hashSync('111', 8)
+  })
+    .then(user => {
+      user.setRoles([2])
     });
-   
-    Role.create({
-      id: 3,
-      name: "admin"
+
+  // add candidate
+  User.create({
+    username: 'user1',
+    email: 'user1@hr-app.com',
+    password: bcrypt.hashSync('111', 8)
+  })
+    .then(user => {
+      user.setRoles([1])
     });
-    
-  }
+
+
+
+}
