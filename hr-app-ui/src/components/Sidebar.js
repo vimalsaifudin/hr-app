@@ -1,6 +1,6 @@
 import React from "react";
 import { Nav } from "react-bootstrap";
-import { withRouter } from "react-router";
+import { withRouter } from "react-router-dom";
 
 
 const Side = props => {
